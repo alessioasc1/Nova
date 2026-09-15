@@ -42,7 +42,6 @@ models:
       +schema: staging
       +materialized: view
     silver:
-      +catalog: workspace
       +schema: silver
       +materialized: table
     gold:

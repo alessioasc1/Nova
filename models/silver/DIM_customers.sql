@@ -1,3 +1,8 @@
+{{ config(
+    materialized='table',
+    catalog='workspace',
+    schema='silver'
+) }}
 select 
     customer_email,
     max(customer_name) as customer_name,

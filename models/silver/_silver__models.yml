@@ -1,0 +1,82 @@
+version: 2
+
+models:
+  - name: DIM_products
+    description: "Anagrafica prodotti normalizzata"
+    columns:
+      - name: product_id
+        description: "Chiave primaria del prodotto"
+        tests:
+          - unique
+          - not_null
+
+      - name: product_category
+        description: "Categoria di appartenenza del prodotto"
+        tests:
+          - not_null
+
+  - name: DIM_customers
+    description: "Anagrafica clienti pulita"
+    columns:
+      - name: customer_email
+        description: "Email univoca del cliente"
+        tests:
+          - unique
+          - not_null
+
+  - name: DIM_date
+    description: "Tabella calendario per analisi temporali"
+    columns:
+      - name: date_day
+        description: "Data singola"
+        tests:
+          - unique
+          - not_null
+
+  - name: FACT_transactions
+    description: "Transazioni di vendita pulite e formattate"
+    columns:
+      - name: order_id
+        tests:
+          - not_null
+
+      - name: transaction_date
+        tests:
+          - not_null
+
+      - name: product_id
+        description: "Verifica che ogni vendita punti a un prodotto esistente"
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('DIM_products')
+                field: product_id
+
+      - name: customer_email
+        description: "Verifica l'integrità con l'anagrafica clienti"
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('DIM_customers')
+                field: customer_email
+
+  - name: FACT_targets
+    description: "Target di vendita mensili per regione e categoria"
+    columns:
+      - name: target_month
+        tests:
+          - not_null
+
+      - name: product_category
+        tests:
+          - not_null
+
+      - name: region
+        tests:
+          - not_null
+
+      - name: target_amount
+        tests:
+          - not_null

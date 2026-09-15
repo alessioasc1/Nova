@@ -1,10 +1,10 @@
 select
     order_id,
-    transaction_date,
-    customer_email,
+    -- Se la data è NULL, assegna la data di default '1900-01-01'
+    coalesce(transaction_date, cast('2022-01-01' as date)) as transaction_date,
     product_id,
-    unit_price,
+    customer_email,
     quantity,
-    discount_pct,
-    is_return
+    unit_price,
+    discount_pct
 from {{ ref('stg_sales_transactions') }}

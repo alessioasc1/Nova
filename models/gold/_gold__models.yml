@@ -1,0 +1,37 @@
+version: 2
+
+models:
+  - name: gold_sales_daily
+    description: "Mart giornaliero per KPI temporali e trend con media mobile"
+    columns:
+      - name: transaction_date
+        description: "Data della transazione"
+        tests:
+          - not_null
+
+      - name: product_id
+        description: "ID del prodotto - verifica integrita con dimensione prodotti"
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('DIM_products')
+                field: product_id
+
+      - name: actual_revenue
+        description: "Fatturato netto giornaliero pre-calcolato"
+        tests:
+          - not_null
+
+  - name: gold_sales_targets_monthly
+    description: "Mart mensile unificato per confronto Target vs Actuals"
+    columns:
+      - name: month_start_date
+        description: "Primo giorno del mese di riferimento"
+        tests:
+          - not_null
+
+      - name: product_category
+        description: "Categoria di prodotto"
+        tests:
+          - not_null
