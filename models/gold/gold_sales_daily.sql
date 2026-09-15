@@ -19,12 +19,5 @@ select
     product_category,
     actual_revenue,
     total_profit,
-    total_orders,
-    
-    -- Media Mobile 7 giorni calcolata in dbt (Window Function)
-    avg(actual_revenue) over (
-        partition by product_category 
-        order by transaction_date 
-        rows between 6 preceding and current row
-    ) as moving_avg_7d_revenue
+    total_orders
 from daily_base
