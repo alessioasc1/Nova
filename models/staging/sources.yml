@@ -2,7 +2,7 @@ version: 2
 
 sources:
   - name: bronze
-    database: workspace  # o il tuo catalogo Unity Catalog (es. main)
+    database: workspace
     schema: nova_retail
     tables:
       - name: transactions_bronze

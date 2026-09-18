@@ -13,8 +13,6 @@ case
             try_to_date(transaction_date, 'dd-MMM-yyyy'),
             try_to_date(transaction_date, 'MM/dd/yyyy'),
             try_to_date(transaction_date, 'dd/MM/yyyy'),
-
-                -- 8. Fallback per timestamp completi (es. 2023-01-17 14:30:00)
                 cast(try_to_timestamp(cast(transaction_date as string)) as date)
             )
         end as transaction_date,

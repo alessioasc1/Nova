@@ -1,12 +1,9 @@
 {% set relation = source('bronze', 'targets_bronze') %}
-
-{# Recupera dinamicamente le colonne escludendo i metadati e le dimensioni #}
 {% set target_cols = [] %}
 {% if execute %}
     {% set all_columns = adapter.get_columns_in_relation(relation) %}
     {% for col in all_columns %}
         {% set col_name = col.name.lower() %}
-        {# Filtra escludendo Region, Category e qualsiasi colonna di metadati che inizia con _ #}
         {% if col_name not in ['region', 'category'] and not col_name.startswith('_') %}
             {% do target_cols.append(col.name) %}
         {% endif %}
