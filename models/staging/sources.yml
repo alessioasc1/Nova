@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: bronze
+    database: workspace  # o il tuo catalogo Unity Catalog (es. main)
+    schema: nova_retail
+    tables:
+      - name: transactions_bronze
+      - name: reviews_bronze
+      - name: targets_bronze
