@@ -16,10 +16,7 @@ select
     quarter(date_day) as quarter,
     month(date_day) as month_number,
     date_format(date_day, 'MMMM') as month_name,
-    
-    -- Corretto: restituisce il mese abbreviato (es. 'Jan', 'Feb')
     date_format(date_day, 'MMM') as month_short_name,
-    
     day(date_day) as day_of_month,
     dayofweek(date_day) as day_of_week,
     date_format(date_day, 'EEEE') as day_name,

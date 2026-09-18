@@ -3,8 +3,6 @@ with daily_base as (
         t.transaction_date,
         p.product_id,
         p.product_category,
-        
-        -- Pre-calcolo Ricavo Netto, Margine di Profitto (30%) e Conteggio Ordini
         sum(t.quantity * t.unit_price * (1 - coalesce(t.discount_pct, 0))) as actual_revenue,
         sum(t.quantity * t.unit_price * (1 - coalesce(t.discount_pct, 0)) * 0.30) as total_profit,
         count(distinct t.order_id) as total_orders
